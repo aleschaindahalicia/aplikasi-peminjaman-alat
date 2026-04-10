@@ -21,25 +21,24 @@ class AlatController extends BaseController
     {
         $keyword = $this->request->getGet('keyword');
 
-        $builder = $this->AlatModel->select('alat.*, category.nama_category')
-                                   ->join('category', 'category.id_category = alat.id_category', 'left')
-                                   ->where('alat.deleted_at', null);
+        $builder = $this->AlatModel
+            ->select('alat.*, category.nama_category')
+            ->join('category', 'category.id_category = alat.id_category', 'left');
 
-        if ($keyword) {
-            $builder->like('alat.nama_alat', $keyword)
-                    ->orLike('alat.merk_alat', $keyword)
-                    ->orLike('alat.status', $keyword);
+        // ❗ HAPUS manual deleted_at filter (CI4 sudah handle soft delete)
+        
+        if (!empty($keyword)) {
+            $builder->groupStart()
+                ->like('alat.nama_alat', $keyword)
+                ->orLike('alat.merk_alat', $keyword)
+                ->orLike('alat.status', $keyword)
+                ->orLike('alat.kondisi', $keyword)
+                ->orLike('alat.deskripsi_alat', $keyword)
+                ->orLike('category.nama_category', $keyword)
+            ->groupEnd();
         }
 
         $data['alat'] = $builder->findAll();
-
-        // Log activity untuk pencarian
-        if ($keyword) {
-            $this->logModel->insert([
-                'id_user'  => session()->get('id_user'),
-                'activity' => 'Mencari alat dengan keyword: ' . $keyword
-            ]);
-        }
 
         return view('alat/index', $data);
     }

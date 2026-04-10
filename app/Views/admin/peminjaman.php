@@ -43,11 +43,21 @@
         <div class="card-body">
 
             <div class="table-responsive">
+                <form method="get" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control"
+                            placeholder="Cari apa aja... (alat, kategori, user, status)"
+                            value="<?= $_GET['search'] ?? '' ?>">
+                        <button class="btn btn-primary">Cari</button>
+                    </div>
+                </form>
                 <table class="table table-hover align-middle">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nama Alat</th>
+                            <th>Merk</th>
+                            <th>Kategori</th>
                             <th>Peminjam</th>
                             <th>Tgl Pinjam</th>
                             <th>Tgl Kembali</th>
@@ -60,7 +70,7 @@
                     <tbody>
                         <?php if (empty($peminjaman)): ?>
                         <tr>
-                            <td colspan="7" class="text-center text-muted">
+                            <td colspan="10" class="text-center text-muted">
                                 Belum ada data peminjaman
                             </td>
                         </tr>
@@ -69,11 +79,14 @@
                             <tr>
                                 <td><?= esc($p['id_peminjaman']) ?></td>
                                 <td><?= esc($p['nama_alat']) ?></td>
+                                <td><?= esc($p['merk_alat']) ?></td>
+                                <td><?= esc($p['nama_category']) ?></td>
+
                                 <td>
-                                    <small class="text-muted">
-                                        <?= esc($p['email']) ?>
-                                    </small>
+                                    <?= esc($p['nama_user']) ?><br>
+                                    <small class="text-muted"><?= esc($p['email']) ?></small>
                                 </td>
+
                                 <td><?= esc($p['tanggal_pinjam']) ?></td>
                                 <td><?= esc($p['tanggal_kembali']) ?: '-' ?></td>
 
@@ -98,13 +111,13 @@
 
                                 <td>
                                     <a href="<?= base_url('admin/peminjaman/edit/'.$p['id_peminjaman']) ?>"
-                                       class="btn btn-sm btn-warning">
+                                    class="btn btn-sm btn-warning">
                                         Edit Status
                                     </a>
 
                                     <a href="<?= base_url('admin/peminjaman/delete/'.$p['id_peminjaman']) ?>"
-                                       class="btn btn-sm btn-danger"
-                                       onclick="return confirm('Yakin hapus peminjaman ini?')">
+                                    class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Yakin hapus peminjaman ini?')">
                                         Hapus
                                     </a>
                                 </td>

@@ -53,6 +53,12 @@
                     </li>
 
                     <li class="list-group-item">
+                        <a href="<?= base_url('category') ?>" class="text-decoration-none">
+                            Daftar Kategori
+                        </a>
+                    </li>
+
+                    <li class="list-group-item">
                         <a href="<?= base_url('/user') ?>" class="text-decoration-none">
                             Kelola User
                         </a>

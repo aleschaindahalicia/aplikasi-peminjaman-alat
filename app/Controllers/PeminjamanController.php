@@ -135,30 +135,44 @@ class PeminjamanController extends BaseController
     }
 
     public function dataPeminjaman()
-{
-    $userId = session()->get('id_user');
-    $role   = session()->get('role');
+    {
+        $userId = session()->get('id_user');
+        $role   = session()->get('role');
+        $search = $this->request->getGet('search');
 
-    $builder = $this->PeminjamanModel
-        ->select('peminjaman.*, alat.nama_alat, user.email')
-        ->join('alat', 'alat.id_alat = peminjaman.id_alat')
-        ->join('user', 'user.id_user = peminjaman.id_user');
+        $builder = $this->PeminjamanModel
+            ->select('peminjaman.*, alat.nama_alat, alat.merk_alat, category.nama_category, user.nama_user, user.email')
+            ->join('alat', 'alat.id_alat = peminjaman.id_alat')
+            ->join('category', 'category.id_category = alat.id_category')
+            ->join('user', 'user.id_user = peminjaman.id_user');
 
-    // selain admin & petugas → cuma lihat punya sendiri
-    if ($role !== 'Admin' && $role !== 'Petugas') {
-        $builder->where('peminjaman.id_user', $userId);
+        // 🔍 SEARCH GLOBAL
+        if ($search) {
+            $builder->groupStart()
+                ->like('alat.nama_alat', $search)
+                ->orLike('alat.merk_alat', $search)
+                ->orLike('category.nama_category', $search)
+                ->orLike('peminjaman.status', $search)
+                ->orLike('user.nama_user', $search)
+                ->orLike('user.email', $search)
+            ->groupEnd();
+        }
+
+        // role filter
+        if ($role !== 'Admin' && $role !== 'Petugas') {
+            $builder->where('peminjaman.id_user', $userId);
+        }
+
+        $data['peminjaman'] = $builder->orderBy('id_peminjaman', 'DESC')->findAll();
+
+        if ($role == 'Admin') {
+            return view('admin/peminjaman', $data);
+        } elseif ($role == 'Petugas') {
+            return view('petugas/peminjaman', $data);
+        } else {
+            return view('peminjaman/index', $data);
+        }
     }
-
-    $data['peminjaman'] = $builder->findAll();
-
-    if ($role == 'Admin') {
-        return view('admin/peminjaman', $data);
-    } elseif ($role == 'Petugas') {
-        return view('petugas/peminjaman', $data);
-    } else {
-        return view('peminjaman/index', $data);
-    }
-}
 
     public function prosesTolak($id)
     {
@@ -176,9 +190,9 @@ class PeminjamanController extends BaseController
             ->first();
 
         $this->PeminjamanModel->update($id, [
-    'status' => 'Ditolak',
-    'alasan_penolakan' => $alasan
-]);
+            'status' => 'Ditolak',
+            'alasan_penolakan' => $alasan
+        ]);
     
 
         $this->AlatModel->update($pinjam['id_alat'], [

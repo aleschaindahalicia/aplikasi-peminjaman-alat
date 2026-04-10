@@ -72,7 +72,9 @@
                             <th>Kondisi</th>
                             <th>Deskripsi Alat</th>
                             <th>Status</th>
-                            <th>Aksi</th>
+                            <?php if (session('role') === 'Admin' || session('role') === 'Peminjam'): ?>
+                                <th>Aksi</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
 
@@ -99,7 +101,7 @@
                                     <span class="badge bg-secondary"><?= esc($a['status']) ?></span>
                                 <?php endif; ?>
                             </td>
-
+                                    
                             <td>
                                 <?php if (session('role') === 'Admin'): ?>
 

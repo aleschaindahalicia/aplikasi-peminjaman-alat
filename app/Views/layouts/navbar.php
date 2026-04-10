@@ -22,6 +22,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('category') ?>">
+                         Daftar Kategori
+                    </a>
+                </li>
+
                 <!-- Menu khusus Admin -->
                 <?php if (session('role') === 'Admin'): ?>
                     <li class="nav-item">
