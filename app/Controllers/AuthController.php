@@ -1,0 +1,75 @@
+<?php
+  
+namespace App\Controllers;
+
+use App\Controllers\BaseController;  
+use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\UserModel;
+use App\Models\UserProfileModel;
+use App\Models\ActivityLogModel;
+  
+class AuthController extends BaseController
+  
+{
+    public function index() 
+    {
+        //
+    }
+  
+    public function login()
+    {
+        return view('auth/login');
+    }
+  
+    public function attemptLogin()
+    {
+        $userModel = new UserModel();
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        $user = $userModel->where('email', $email)->first();
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Email tidak ditemukan');
+        }
+  
+        if (!password_verify($password, $user['password'])) {
+            return redirect()->back()->with('error', 'Password salah');
+        }
+  
+        session()->set([
+            'id_user'    => $user['id_user'],
+            'email'      => $user['email'],
+            'role'       => $user['role'],
+            'isLoggedIn' => true
+        ]);
+  
+        $logModel = new ActivityLogModel();
+  
+        $logModel->insert([
+            'id_user'    => $user['id_user'],
+            'activity'   => 'Login ke sistem',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+  
+        if ($user['role'] === 'Admin') {
+            return redirect()->to('/dashboard');
+        } elseif ($user['role'] === 'Petugas') {
+            return redirect()->to('/dashboard');
+        } else {
+            return redirect()->to('/dashboard');
+        }
+    }
+  
+    public function logout()
+    {
+        $logModel = new ActivityLogModel();
+        $logModel->insert([
+            'id_user'    => session()->get('id_user'),
+            'activity'   => 'Logout dari sistem',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+  
+        session()->destroy();
+        return redirect()->to('/')->with('success', 'Berhasil logout');
+    } 
+}
