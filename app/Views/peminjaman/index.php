@@ -36,12 +36,9 @@
         <div class="card-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h5 class="mb-0">Data Peminjaman Saya</h5>
+                    <h5 class="mb-0 text-white">Data Peminjaman Saya</h5>
                 </div>
                 <div class="col-auto">
-                    <a href="<?= base_url('/dashboard') ?>" class="btn btn-secondary btn-sm">
-                        ← Kembali ke Dashboard
-                    </a>
                 </div>
             </div>
         </div>

@@ -17,10 +17,7 @@
 
     <div class="card shadow-sm mt-4">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Daftar Pengembalian</h5>
-            <a href="<?= base_url('dashboard') ?>" class="btn btn-sm btn-light">
-                ← Kembali ke Dashboard
-            </a>
+            <h5 class="mb-0 text-white">Daftar Pengembalian</h5>
         </div>
 
         <div class="card-body">

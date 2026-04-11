@@ -34,10 +34,7 @@
 
     <div class="card shadow fade-in">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Data Peminjaman</h5>
-            <a href="<?= base_url('dashboard') ?>" class="btn btn-sm btn-secondary">
-                Kembali ke Dashboard
-            </a>
+            <h5 class="mb-0 text-white">Data Peminjaman</h5>
         </div>
 
         <div class="card-body">

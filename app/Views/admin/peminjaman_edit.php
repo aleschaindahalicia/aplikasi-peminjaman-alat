@@ -34,10 +34,7 @@
 
     <div class="card shadow fade-in">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Edit Status Peminjaman</h5>
-            <a href="<?= base_url('admin/peminjaman') ?>" class="btn btn-sm btn-secondary">
-                Kembali ke Data Peminjaman
-            </a>
+            <h5 class="mb-0 text-white">Edit Status Peminjaman</h5>
         </div>
 
         <div class="card-body">

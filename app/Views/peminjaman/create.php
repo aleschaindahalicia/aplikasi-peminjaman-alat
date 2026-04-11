@@ -39,7 +39,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h5 class="mb-0">Form Peminjaman Alat</h5>
+                            <h5 class="mb-0 text-white">Form Peminjaman Alat</h5>
                         </div>
                     </div>
                 </div>

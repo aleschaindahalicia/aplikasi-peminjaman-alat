@@ -34,7 +34,7 @@
 
     <div class="card shadow fade-in">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Tambah User Baru</h5>
+            <h5 class="mb-0 text-white">Tambah User Baru</h5>
         </div>
 
         <div class="card-body">

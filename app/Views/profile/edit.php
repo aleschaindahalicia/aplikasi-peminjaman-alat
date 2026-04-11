@@ -39,7 +39,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h5 class="mb-0">Edit Profile</h5>
+                            <h5 class="mb-0 text-white">Edit Profile</h5>
                         </div>
                     </div>
                 </div>
