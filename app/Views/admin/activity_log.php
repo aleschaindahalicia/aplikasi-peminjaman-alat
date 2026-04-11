@@ -20,9 +20,6 @@
     <div class="card shadow fade-in">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Activity Log</h5>
-            <a href="<?= base_url('dashboard') ?>" class="btn btn-sm btn-secondary">
-                Kembali ke Dashboard
-            </a>
         </div>
 
         <div class="card-body">

@@ -195,6 +195,10 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.3s ease;
 }
 
+.table tbody td {
+  color: white !important;
+}
+
 .table-responsive {
     border-radius: var(--border-radius);
     overflow: hidden;

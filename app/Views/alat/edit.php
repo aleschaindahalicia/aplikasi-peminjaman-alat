@@ -99,15 +99,11 @@
                     <label class="form-label">Status <span class="text-danger">*</span></label>
                     <select name="status" class="form-select" required>
                         <option value="Tersedia" <?= $alat['status'] == 'Tersedia' ? 'selected' : '' ?>>Tersedia</option>
-                        <option value="Dibooking" <?= $alat['status'] == 'Dibooking' ? 'selected' : '' ?>>Dibooking</option>
-                        <option value="Dipinjam" <?= $alat['status'] == 'Dipinjam' ? 'selected' : '' ?>>Dipinjam</option>
                         <option value="Tidak Tersedia" <?= $alat['status'] == 'Tidak Tersedia' ? 'selected' : '' ?>>Tidak Tersedia</option>
                     </select>
                     <div class="form-text">
                         <small class="text-muted">
                             <strong>Tersedia:</strong> Alat dapat dipinjam | 
-                            <strong>Dibooking:</strong> Alat sedang dalam proses peminjaman | 
-                            <strong>Dipinjam:</strong> Alat sedang dipinjam | 
                             <strong>Tidak Tersedia:</strong> Alat tidak dapat digunakan (otomatis untuk kondisi Rusak Berat)
                         </small>
                     </div>
