@@ -24,8 +24,6 @@ class AlatController extends BaseController
         $builder = $this->AlatModel
             ->select('alat.*, category.nama_category')
             ->join('category', 'category.id_category = alat.id_category', 'left');
-
-        // ❗ HAPUS manual deleted_at filter (CI4 sudah handle soft delete)
         
         if (!empty($keyword)) {
             $builder->groupStart()
